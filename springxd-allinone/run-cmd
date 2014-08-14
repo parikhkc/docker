@@ -1,0 +1,1 @@
+docker run --name xd -P -d kparikh/springxd:1.0.0

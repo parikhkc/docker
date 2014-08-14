@@ -1,0 +1,44 @@
+# Set transport middleware (rabbit or redis)
+: ${xd_transport:=rabbit}
+
+# datasource for batch jobs
+: ${spring_datasource_url:=jdbc\:mysql\://$MYSQL_PORT_3306_TCP_ADDR\:$MYSQL_PORT_3306_TCP_PORT/springbatch}
+: ${spring_datasource_username:=batchuser}
+: ${spring_datasource_password:=password}
+: ${spring_datasource_driverClassName:=com.mysql.jdbc.Driver}
+: ${spring_datasource_validationQuery:="select 1"}
+
+# redis config for analytics (and transport)
+: ${spring_redis_host:=$REDIS_PORT_6379_TCP_ADDR}
+: ${spring_redis_port:=$REDIS_PORT_6379_TCP_PORT}
+
+# rabbit config for transport
+: ${spring_rabbitmq_addresses:=$RABBITMQ_PORT_5672_TCP_ADDR:$RABBITMQ_PORT_5672_TCP_PORT}
+: ${spring_rabbitmq_username:=admin}
+: ${spring_rabbitmq_password:=admin}
+: ${spring_rabbitmq_virtual_host:=}
+: ${spring_rabbitmq_useSSL:=false}
+: ${spring_rabbitmq_sslProperties:=}
+
+# spring hadoop config
+: ${spring_hadoop_fsUrl:=hdfs://$HDFS_PORT_8020_TCP_ADDR:8020}
+
+# zookeeper host/port
+: ${zk_client_connect:=$ZK_PORT_2181_TCP_ADDR:$ZK_PORT_2181_TCP_PORT}
+
+export xd_transport
+export spring_datasource_url
+export spring_datasource_username
+export spring_datasource_password
+export spring_datasource_driverClassName
+export spring_datasource_validationQuery
+export spring_redis_host
+export spring_redis_port
+export spring_rabbitmq_addresses
+export spring_rabbitmq_username
+export spring_rabbitmq_password
+export spring_rabbitmq_virtual_host
+export spring_rabbitmq_useSSL
+export spring_rabbitmq_sslProperties
+export spring_hadoop_fsUrl
+export zk_client_connect

@@ -1,0 +1,22 @@
+// XD Shell 1.1.0.RELEASE log opened at 2014-08-08 16:53:33
+admin config server http://192.168.59.103:49159
+exit
+// XD Shell 1.1.0.RELEASE log closed at 2014-08-08 16:54:43
+// XD Shell 1.1.0.RELEASE log opened at 2014-08-12 14:50:31
+admin config server http://192.168.59.103:49259
+runtime containers
+runtime containers
+runtime containers
+admin config info
+runtime modules 
+runtime containers
+stream create --name c1 --definition "time --fixedDelay=2|log" --deploy 
+stream create --name c2 --definition "time --fixedDelay=2|log" --deploy 
+runtime containers
+runtime modules 
+stream destroy --name c1
+stream destroy --name c2
+runtime modules 
+runtime containers
+exit
+// XD Shell 1.1.0.RELEASE log closed at 2014-08-12 15:17:05

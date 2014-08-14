@@ -1,0 +1,9 @@
+#!/bin/bash
+
+source /env
+
+XD_HOME=/spring-xd-1.0.0.RELEASE/xd
+
+# Start Spring XD Admin
+echo "Starting Spring XD Admin node"
+$XD_HOME/bin/xd-admin

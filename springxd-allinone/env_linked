@@ -1,0 +1,35 @@
+# Set transport middleware (rabbit or redis)
+export xd_transport=rabbit
+
+# datasource for batch jobs
+export spring_datasource_url=jdbc:mysql://$MYSQL_PORT_3306_TCP_ADDR:$MYSQL_PORT_3306_TCP_PORT/springbatch
+export spring_datasource_username=batchuser
+export spring_datasource_password=password
+export spring_datasource_driverClassName=com.mysql.jdbc.Driver
+export spring_datasource_validationQuery="select 1"
+
+# redis config for analytics (and transport)
+export spring_redis_host=$REDIS_PORT_6379_TCP_ADDR
+export spring_redis_port=$REDIS_PORT_6379_TCP_PORT
+
+# rabbit config for transport
+export spring_rabbitmq_addresses=$RMQ_PORT_5672_TCP_ADDR:$RMQ_PORT_5672_TCP_PORT
+export spring_rabbitmq_username=admin
+export spring_rabbitmq_password=kwGMV5mcVhWy
+export spring_rabbitmq_virtual_host=
+export spring_rabbitmq_useSSL=false
+export spring_rabbitmq_sslProperties=
+
+# spring hadoop config
+export spring_hadoop_fsUrl=hdfs://$HDFS_PORT_8020_TCP_ADDR:8020
+
+export zk_client_connect=$ZK_PORT_2181_TCP_ADDR:$ZK_PORT_2181_TCP_PORT
+
+
+#CREATE USER 'batchuser'@'172.17.%.%' IDENTIFIED BY 'password';
+
+#CREATE DATABASE IF NOT EXISTS `springbatch` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;
+
+#GRANT SELECT, LOCK TABLES, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER ON `springbatch`.* TO 'batchuser'@'172.17.%.%';
+
+#FLUSH PRIVILEGES;

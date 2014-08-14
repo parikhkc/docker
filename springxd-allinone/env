@@ -1,0 +1,31 @@
+# Admin Server port
+server_port=9393
+
+# Set transport middleware (rabbit or redis)
+export xd_transport=rabbit
+
+# datasource for batch jobs
+export spring_datasource_url=jdbc:mysql://localhost:3306/springbatch
+export spring_datasource_username=batchuser
+export spring_datasource_password=password
+export spring_datasource_driverClassName=com.mysql.jdbc.Driver
+export spring_datasource_validationQuery="select 1"
+
+# redis config for analytics (and transport)
+export spring_redis_host=localhost
+export spring_redis_port=6379
+
+# rabbit config for transport
+export spring_rabbitmq_addresses=localhost:5672
+export spring_rabbitmq_username=admin
+export spring_rabbitmq_password=admin
+export spring_rabbitmq_virtual_host=
+export spring_rabbitmq_useSSL=false
+export spring_rabbitmq_sslProperties=
+
+# spring hadoop config
+export spring_hadoop_fsUrl=hdfs://localhost:8020
+
+# Zookeeper config
+export zk_client_connect=localhost:2181
+
