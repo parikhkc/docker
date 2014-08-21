@@ -1,0 +1,50 @@
+---
+name: Spring XD
+description: ''
+keywords: Spring XD, Big Data, Analytics, Hadoop, Java, Machine Learning, Open Source,
+  Data Ingestion
+type: Default
+documentation: ''
+images:
+- name: kparikh_springxd_latest
+  source: kparikh/springxd:latest
+  category: Spring XD Nodes
+  type: Default
+  links:
+  - service: kparikh_zookeeper
+    alias: zk
+  - service: kparikh_mysql
+    alias: mysql
+  - service: kparikh_rabbitmq
+    alias: rabbitmq
+  - service: kparikh_redis
+    alias: redis
+- name: kparikh_zookeeper
+  source: kparikh/zookeeper:latest
+  category: Tracker
+  type: Default
+- name: kparikh_mysql
+  source: kparikh/mysql:latest
+  category: Database
+  type: Default
+- name: kparikh_rabbitmq
+  source: kparikh/rabbitmq:latest
+  category: Transport
+  type: Default
+- name: kparikh_redis
+  source: kparikh/redis:latest
+  category: Analytics
+  type: Default
+- name: kparikh_springxd_1
+  source: kparikh/springxd:latest
+  category: Spring XD Nodes
+  type: Default
+  links:
+  - service: kparikh_zookeeper
+    alias: zk
+  - service: kparikh_mysql
+    alias: mysql
+  - service: kparikh_rabbitmq
+    alias: rabbitmq
+  - service: kparikh_redis
+    alias: redis
