@@ -1,51 +1,72 @@
 ---
 name: SpringXD
-description: This Spring XD application template helps you set up a distributed environment
+description: This application template helps you set up a distributed Spring XD  environment
   ready for data streaming and analytics.
 keywords: Spring XD, Big Data, Analytics, Hadoop, Java, Machine Learning, Open Source,
   Data Ingestion
 type: Default
-documentation: |2
+documentation: |
+  ## Requirements
+  Make sure your panamax coreOS host has following resources
+  Minimum Recommended 2 Cores, 2GB of RAM
+  Recommended Setup : 4 Cores , 4GB of RAM
+  ####Hint
+  ```
+  panamax init --cpu=4 --memory=4096
+  ```
+  ```
+  panamax reinstall --cpu=4 --memory=4096 (you will lose all your services so be careful using this option)
+  ```
 
-    ##Requirements
-    Make sure your panamax coreOS host has following resources
-      Minimum Recommended 2 Cores, 2GB of RAM
-      Recommended Setup : 4 Cores , 4GB of RAM
-      **Hint**
-      ```panamax init --cpu=4 --memory=4096```
-      ```panamax reinstall --cpu=4 --memory=4096 (you will lose all your services so be careful using this option)```
+  ## Setup
+  ###Default installation
+  Default configuration will start following 6 service containers.
+  * Redis
+  * RabbitMQ
+  * Zookeeper
+  * MySQL
+  * Spring XD Container
+  * Spring XD Admin Server
 
-    ##Setup
-    Default installation will start 6 service containers:
-      Redis, RabbitMQ, Zookeeper, MySQL, Spring XD Container and Spring XD Admin Server
-      Admin Server port 9393 is exposed on docker host
-      To access Admin Server from your localhost you need to add following port forwarding:
-      ```VBoxManage controlvm panamax-vm natpf1 rule1,tcp,,9494,,9393```
-      You can change 9494 to port of your liking
-      XD-Shell: [http://localhost:9494]
-      UI: [http://localhost:9494/admin-ui]
+  **Spring XD Container**  and **Admin Server** are preconfigured and linked to rest of the other middleware containers.
+  Admin Server listens on port 9393 and its exposed on panamax/docker host at port 9393
 
-    Override usernames and passwords:
-      Add environment variables under the service you want to customize user/password
-      **MySQL**
-        `spring_datasource_username`
-        `spring_datasource_password`
-      **RabbitMQ**
-        `spring_rabbitmq_username`
-        `spring_rabbitmq_password`
+  ###Port Forwarding
+  To access Admin Server from your localhost you need to add following port forwarding:
 
-    ##Start Streaming
+  ```
+  VBoxManage controlvm panamax-vm natpf1 rule1,tcp,,9494,,9393
+  ```
+  Change 9494 to port of your liking
 
+  ###Access to Admin Server
+  **XD-Shell**: [http://localhost:9494]
+  **UI**: [http://localhost:9494/admin-ui]
+
+  ###Override usernames and passwords:
+  You can change MySQL and RabbitMQ username and passwords via environment variables. Set values for following properties under MySQL and RabbitMQ services
+  **MySQL**
+  * `spring_datasource_username`
+  * `spring_datasource_password`
+  **RabbitMQ**
+  * `spring_rabbitmq_username`
+  * `spring_rabbitmq_password`
+
+  ##Start Streaming
   On your local host set up port forwarding to access XD Admin Server
-  ```VBoxManage controlvm panamax-vm natpf1 rule1,tcp,,9494,,9393```
+  ```
+  VBoxManage controlvm panamax-vm natpf1 rule1,tcp,,9494,,9393
+  ```
 
   Login to xd-shell and create stream
-  ```xd-shell
+  ```
+  xd-shell
   xd:> config admin server http://localhost:9494
   xd:> stream create --definition "time | log" --name ticktock --deploy
   ```
-    ##Documentation
-    Spring XD is docs are available [here](http://docs.spring.io/spring-xd/docs/1.0.0.RELEASE/reference/html/)
+
+  ##References
+    Spring XD is docs are available [here](http://docs.spring.io/spring-xd/docs/1.0.0.RELEASE/reference/html)
 images:
 - name: kparikh_springxd_latest
   source: kparikh/springxd:latest
