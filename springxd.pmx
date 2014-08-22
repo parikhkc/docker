@@ -7,7 +7,7 @@ keywords: Spring XD, Big Data, Analytics, Hadoop, Java, Machine Learning, Open S
 type: Default
 documentation: |2
 
-    ## Requirements
+    ##Requirements
     Make sure your panamax coreOS host has following resources
       Minimum Recommended 2 Cores, 2GB of RAM
       Recommended Setup : 4 Cores , 4GB of RAM
@@ -15,7 +15,7 @@ documentation: |2
       ```panamax init --cpu=4 --memory=4096```
       ```panamax reinstall --cpu=4 --memory=4096 (you will lose all your services so be careful using this option)```
 
-    ## Setup
+    ##Setup
     Default installation will start 6 service containers:
       Redis, RabbitMQ, Zookeeper, MySQL, Spring XD Container and Spring XD Admin Server
       Admin Server port 9393 is exposed on docker host
@@ -34,7 +34,7 @@ documentation: |2
         `spring_rabbitmq_username`
         `spring_rabbitmq_password`
 
-    ## Start Streaming
+    ##Start Streaming
 
   On your local host set up port forwarding to access XD Admin Server
   ```VBoxManage controlvm panamax-vm natpf1 rule1,tcp,,9494,,9393```
@@ -44,7 +44,7 @@ documentation: |2
   xd:> config admin server http://localhost:9494
   xd:> stream create --definition "time | log" --name ticktock --deploy
   ```
-    ## Documentation
+    ##Documentation
     Spring XD is docs are available [here](http://docs.spring.io/spring-xd/docs/1.0.0.RELEASE/reference/html/)
 images:
 - name: kparikh_springxd_latest
