@@ -48,18 +48,22 @@ documentation: |
 
   ###Access to Admin Server
   
-  **XD-Shell**: [http://localhost:9494]
-  **UI**: [http://localhost:9494/admin-ui]
+  * **XD-Shell**: [http://localhost:9494]
+  * **UI**: [http://localhost:9494/admin-ui]
 
   ###Override usernames and passwords
   
   You can change MySQL and RabbitMQ username and passwords via environment variables. Set values for following properties under MySQL and RabbitMQ services
+  
   **MySQL**
-  * `spring_datasource_username`
-  * `spring_datasource_password`
+  
+  * `spring_datasource_username`  
+  * `spring_datasource_password`  
+  
   **RabbitMQ**
-  * `spring_rabbitmq_username`
-  * `spring_rabbitmq_password`
+  
+  * `spring_rabbitmq_username`  
+  * `spring_rabbitmq_password`  
 
   ##Start Streaming
   
@@ -70,9 +74,9 @@ documentation: |
 
   Login to xd-shell and create stream
   ```
-  xd-shell
-  xd:> config admin server http://localhost:9494
-  xd:> stream create --definition "time | log" --name ticktock --deploy
+  xd-shell  
+  xd:> config admin server http://localhost:9494  
+  xd:> stream create --definition "time | log" --name ticktock --deploy  
   ```
 
   ##References
