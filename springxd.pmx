@@ -83,7 +83,7 @@ documentation: |
   
     Spring XD is docs are available [here](http://docs.spring.io/spring-xd/docs/1.0.0.RELEASE/reference/html)
 images:
-- name: XDContainer
+- name: kparikh_springxd_latest
   source: kparikh/springxd:latest
   category: Spring XD Nodes
   type: Default
@@ -112,7 +112,7 @@ images:
   source: kparikh/redis:latest
   category: Analytics
   type: Default
-- name: XDAdmin
+- name: kparikh_springxd_1
   source: kparikh/springxd:latest
   category: Spring XD Nodes
   type: Default
