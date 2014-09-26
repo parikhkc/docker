@@ -1,34 +1,31 @@
-FROM ubuntu:14.04
+FROM java:7
 MAINTAINER Kashyap Parikh <kparikh@pivotal.io>
 
-#install wget
-RUN \
-    apt-get update && \
-    apt-get install -y software-properties-common wget
+# TYPE can be release or snapshot
+ENV TYPE release
 
-# install Oracle Java 7
-RUN \
-  echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  apt-get update && \
-  apt-get install -y oracle-java7-installer && \
-  rm -rf /var/cache/oracle-jdk7-installer
+# VERSION string 1.0.0.RELEASE, 1.0.1.BUILD-SNAPSHOT etc
+ENV VERSION 1.0.0.RELEASE
 
-ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
+# Create springio user and group
+RUN groupadd -r springio && useradd -r -g springio springio
 
-# install Spring XD
+# download and unzip Spring XD
 RUN \
-   apt-get install -y unzip && \
    cd /tmp && \
-   wget -q http://deq44nzfzkcur.cloudfront.net/simple/libs-release-local/org/springframework/xd/spring-xd/1.0.0.RELEASE/spring-xd-1.0.0.RELEASE-dist.zip && \
-   unzip -qq spring-xd-1.0.0.RELEASE-dist.zip -d / && \
-   rm -rf /tmp/spring-xd-1.0.0.RELEASE-dist.zip
+   wget -q http://deq44nzfzkcur.cloudfront.net/simple/libs-${TYPE}-local/org/springframework/xd/spring-xd/${VERSION}/spring-xd-${VERSION}-dist.zip && \
+   unzip -qq spring-xd-${VERSION}-dist.zip -d /opt && \
+   rm -rf /tmp/spring-xd-${VERSION}-dist.zip && \
+   chown -R springio:springio /opt/spring-xd-${VERSION} && \
+   ln -s /opt/spring-xd-${VERSION} /opt/springxd
 
-ADD startup.sh /startup.sh
-ADD env /env
+ADD startup.sh /opt/springxd/startup.sh
 
-RUN chmod 755 /*.sh /env
-EXPOSE 2181 9393
+RUN chmod 755 /opt/springxd/startup.sh
 
-CMD /startup.sh
+USER springio
+WORKDIR /opt/springxd
+
+EXPOSE 9393
+
+CMD ["startup.sh"]

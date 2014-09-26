@@ -6,18 +6,23 @@ LOGFILE=${XD_LOGS}/singlenode-console.log
 
 mkdir -p ${XD_LOGS}
 
-# Start Spring XD Singlenode
-echo "Starting Spring XD Singlenode"
-#exec $XD_HOME/bin/xd-singlenode >> $LOGFILE 2>&1 & echo \${!}
-#RETVAL=$?
-#case "$RETVAL" in
-#    0)
-#        echo "Spring XD Singlenode started."
-#        echo "Log file: ${LOGFILE}"
-#        ;;
-#    1)
-#        echo "Spring XD Singlenode start failed"
-#        exit 1
-#        ;;
-#esac
-$XD_HOME/bin/xd-singlenode
+echo -e "Starting Spring XD Singlenode\n\n"
+
+nohup $XD_HOME/bin/xd-singlenode 2>1 > $LOGFILE &
+
+while [ ! -f $LOGFILE ] 
+do sleep 1; done
+
+while ! grep "Container arrived" $LOGFILE
+do 
+  echo -n "."
+  sleep 1
+done
+
+echo -e "Spring XD Single node started.\n\n"
+echo -e "Logs are available at : $LOGFILE\n"
+
+echo -e "Starting Spring XD Shell\n"
+
+$XD_HOME/../shell/bin/xd-shell
+
