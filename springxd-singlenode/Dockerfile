@@ -16,8 +16,8 @@ RUN \
    wget -q http://deq44nzfzkcur.cloudfront.net/simple/libs-${TYPE}-local/org/springframework/xd/spring-xd/${VERSION}/spring-xd-${VERSION}-dist.zip && \
    unzip -qq spring-xd-${VERSION}-dist.zip -d /opt && \
    rm -rf /tmp/spring-xd-${VERSION}-dist.zip && \
-   chown -R springio:springio /opt/spring-xd-${VERSION} && \
-   ln -s /opt/spring-xd-${VERSION} /opt/springxd
+   ln -s /opt/spring-xd-${VERSION} /opt/springxd && \
+   chown -R springio:springio /opt/spring-xd-${VERSION} /opt/springxd
 
 ADD startup.sh /opt/springxd/startup.sh
 
@@ -25,7 +25,8 @@ RUN chmod 755 /opt/springxd/startup.sh
 
 USER springio
 WORKDIR /opt/springxd
+ENV PATH /opt/springxd/startup.sh:$PATH
 
 EXPOSE 9393
 
-CMD ["startup.sh"]
+CMD ["./startup.sh"]

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-XD_HOME=/spring-xd-1.0.0.RELEASE/xd
+XD_HOME=/opt/springxd/xd
 XD_LOGS=${XD_HOME}/logs
 LOGFILE=${XD_LOGS}/singlenode-console.log
 
